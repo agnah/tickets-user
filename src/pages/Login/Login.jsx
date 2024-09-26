@@ -1,7 +1,7 @@
-import LoginForm from '../../components/Form/LoginForm'
-import Header from '../../components/partials/Header/Header'
-import Footer from '../../components/partials/Footer/Footer'
-import Tablero from '../../components/Tablero/Tablero'
+import LoginForm from '@components/Form/LoginForm'
+import Header from '@components/partials/Header/Header'
+import Tablero from '@components/Tablero/Tablero'
+import './Login.css'
 
 const Login = () => {
   return (
@@ -11,12 +11,23 @@ const Login = () => {
         <article>
           <div className="container">
             <div className="row">
-              <span>mesa de entrada: pp@mindes.com</span>
+              <div className="row">
+                <div className="col-md-6">
+                  <span className="d-block mb-2">administrativoMesaEntrada</span>
+                  <span className="d-block mb-2">computosAdministrador</span>
+                  <span className="d-block mb-2">computosTecnicoEditor</span>
+                  <span className="d-block mb-2">computosTecnicoLector</span>
+                  <span className="d-block mb-2">superAdmin</span>
+                </div>
+                <div className="col-md-6">
+                </div>
+              </div>
+              {/* <span>mesa de entrada: pp@mindes.com</span>
               <span>area tecnica: eoli@mindes.com</span>
               <span>area tecnica admin: aareatecnica@mindes.com</span>
-              <span> super admin: sadmin@mindes.com</span>
-              <div className="col-md-6 offset-md-3">
-                <Tablero title="Iniciar Sesión" classTitle="text-center">
+              <span> super admin: sadmin@mindes.com</span> */}
+              <div className="container-login">
+                <Tablero title="Iniciar Sesión" classTitle="title-login">
                   <LoginForm />
                 </Tablero>
               </div>
@@ -24,7 +35,6 @@ const Login = () => {
           </div>
         </article>
       </section>
-      <Footer />
     </>
   )
 }

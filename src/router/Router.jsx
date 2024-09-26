@@ -1,16 +1,10 @@
 import { BrowserRouter } from 'react-router-dom'
-import NavDashboard from '../components/partials/Nav/NavDashboard'
-import { AuthProvider } from '../components/partials/Nav/useAuth'
-import { FiltrosProvider } from '../components/tabla/contextTabla'
+import NavDashboard from '@components/partials/Nav/NavDashboard'
 
 const Router = () => {
   return (
     <BrowserRouter>
-      <AuthProvider>
-        <FiltrosProvider>
-          <NavDashboard />
-        </FiltrosProvider>
-      </AuthProvider>
+        <NavDashboard />
     </BrowserRouter>
   )
 }

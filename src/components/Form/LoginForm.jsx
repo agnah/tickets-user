@@ -1,55 +1,62 @@
 import { useForm } from 'react-hook-form'
 import InputForm from './Input/InputForm'
 import Button from './Button/Button'
-import { useAuth } from '../partials/Nav/useAuth'
-import { Navigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import useAuth from '@servicios/UseAuth'
+import './LoginForm.css'
+import { perfil } from '@constantes/constUsers'
 
 const REGEX_PASSWORD =
   /(?=^.{8,}$)(?=.*\d)(?=.*[!@#$%^&*]+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/
-const REGEX_EMAIL = /^[^@]+@[^@]+\.[a-zA-Z]{2,}$/
+// const REGEX_EMAIL = /^[^@]+@[^@]+\.[a-zA-Z]{2,}$/
 
 const LoginForm = () => {
-  const { user, login } = useAuth()
+  const { login, handleSeccion } = useAuth()
+  const { ADMINISTRADOR, TECNICO } = perfil
+  const navigate = useNavigate()
   const {
     register,
     handleSubmit,
     formState: { errors }
   } = useForm()
 
-  const onSubmit = async (data) => {
-    const result = await login(data)
-
+  const onSubmit = async (credentials) => {
+    const result = await login(credentials)
     if (result?.error) {
       alert(result.error)
     } else {
-      console.log(user)
-      return <Navigate to="/tickets"/>
+      if (result.user.perfil === ADMINISTRADOR || result.user.perfil === TECNICO) {
+        handleSeccion()
+      }
+      navigate('/inicio')
     }
   }
-
+  // ! MODIFICAR INPUTFORM's
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
-      <div className="row">
+      <div className="row login-input-box">
         <InputForm
           label="Email"
-          type="email"
+          // type="email"
+          type="text"
           name="email"
+          inputMode="email"
           placeholder="Ingrese su correo..."
           register={register}
           errors={errors}
           // value="pp@mindes.com"
-          classCol="col-md-10 w-100 form-group item-form"
+          classCol="col-md-10 form-group w-100 login-input"
           options={{
             required: 'Campo obligatorio',
             pattern: {
-              value: REGEX_EMAIL,
+              // value: REGEX_EMAIL,
               message: 'El e-mail tiene que ser valido'
             }
           }}
           display={false}
         />
       </div>
-      <div className="row">
+      <div className="row login-input-box">
         <InputForm
           label="Password"
           type="password"
@@ -57,7 +64,7 @@ const LoginForm = () => {
           placeholder="Ingrese su contraseña..."
           register={register}
           errors={errors}
-          classCol="col-md-10 w-100 form-group item-form"
+          classCol="col-md-10 form-group w-100 login-input"
           value="Prueba@123"
           options={{
             required: 'Campo obligatorio',
@@ -71,7 +78,7 @@ const LoginForm = () => {
       </div>
       <div className="row">
         <div className="col-sm-3 w-100 d-flex justify-content-center">
-          <Button title="INGRESAR" classes="btn btn-success" />
+          <Button title="Ingresar" classes="btn-login" />
         </div>
       </div>
     </form>

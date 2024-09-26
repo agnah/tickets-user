@@ -1,176 +1,166 @@
 import { Link } from 'react-router-dom'
-import Header from '../Header/Header'
+import HeaderLogged from '../Header/HeaderLogged'
 import './SideBar.css'
-import { useAuth } from '../../../components/partials/Nav/useAuth'
+import { perfil, rolUsuario } from '@constantes/constUsers'
+import useAuth from '@servicios/UseAuth'
+import { useState } from 'react'
 
 const SideBar = ({ children }) => {
-  const { user } = useAuth()
+  const { user, seccionTicket } = useAuth()
+  const [showNav, setShowNav] = useState(true)
+  const { SUPERADMIN, ADMINISTRADOR, ADMINISTRATIVO } = perfil
+  const { LECTOR } = rolUsuario
+
+  const classDisplay = showNav ? 'show-nav' : 'close-nav'
+  const classColorBoton = seccionTicket ? 'circle-item' : 'circle-item-tramite'
   // ! TRAER LOGICA DE NAVEGACION
   return (
     <div className="sidebar">
+
       <div
-        className="d-flex flex-column flex-shrink-0 bg-dark"
-        style={{ width: '6.5rem' }}
+        className={`menu-container ${classDisplay}`}
       >
         <a
-          href="/"
-          className="d-block p-3 link-dark text-decoration-none text-center my-3"
+          className={`menu-h ${classDisplay}`}
           data-bs-toggle="tooltip"
           data-bs-placement="right"
           data-bs-original-title="Icon-only"
+          onClick={() => {
+            setShowNav(false)
+          }}
         >
-          <i
-            className="fa-solid fa-bars fa-2xl"
-            style={{ color: '#ffffff' }}
-          ></i>
+          <img className="menu-bars" id="icon-menu" src="/public/img/bars-solid.svg"></img>
           <span className="visually-hidden">Icon-only</span>
         </a>
         <ul className="nav flex-column mb-auto text-center px-2">
           <li className="item mb-4">
-            <div className="item-nav mb-2">
+            <div className="item-nav">
               <Link
-                to="/dashboard"
-                className="circle-item "
+                to="/inicio"
+                className={classColorBoton}
                 aria-current="page"
                 data-bs-toggle="tooltip"
                 data-bs-placement="right"
                 data-bs-original-title="Home"
               >
-                <i
-                  className="fa-solid fa-house fa-lg"
-                  style={{ color: '#ffffff' }}
-                ></i>
+               <img className="nav-icon house" src="/public/img/house-solid.svg"></img>
               </Link>
             </div>
-            <span style={{ color: '#eee', fontSize: '12px' }}>Inicio</span>
+            <span className="span-nav">Inicio</span>
           </li>
-          <li className="item mb-4">
-            <div className="item-nav mb-2">
-              <Link
-                to="/tickets"
-                className="circle-item "
-                aria-current="page"
-                data-bs-toggle="tooltip"
-                data-bs-placement="right"
-                data-bs-original-title="Home"
-              >
-                <i
-                  className="fa-solid fa-ticket fa-lg"
-                  style={{ color: '#ffffff' }}
-                ></i>
-              </Link>
-            </div>
-            <span style={{ color: '#eee', fontSize: '12px' }}>Tickets</span>
-          </li>
-          {(user.role.includes('mesa_entrada') || user.role.includes('sadmin')) && (
-            <li className="item mb-4">
-              <div className="item-nav mb-2">
+          {seccionTicket && (
+            <>
+              <li className="item mb-4">
+                <div className="item-nav">
+                  <Link
+                    to="/tickets"
+                    className={classColorBoton}
+                    aria-current="page"
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="right"
+                    data-bs-original-title="Home"
+                  >
+                  <img className="nav-icon ticket" src="/public/img/ticket-solid.svg"></img>
+                  </Link>
+                </div>
+                <span className="span-nav">Tickets</span>
+              </li>
+              <li className="item mb-4">
+                <div className="item-nav">
+                  <Link
+                    to="/tickets/create"
+                    className={classColorBoton}
+                    aria-current="page"
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="right"
+                    data-bs-original-title="Home"
+                  >
+                  <img className="nav-icon plus" src="/public/img/plus-solid.svg"></img>
+                  </Link>
+                </div>
+                <span className='span-nav'>
+                  Crear Ticket
+                </span>
+              </li>
+            </>
+          )}
+          {!seccionTicket && (
+            <><li className="item mb-4">
+              <div className="item-nav">
                 <Link
-                  to="/tickets/create"
-                  className="circle-item "
+                  to="/tramites"
+                  className={classColorBoton}
                   aria-current="page"
                   data-bs-toggle="tooltip"
                   data-bs-placement="right"
-                  data-bs-original-title="Home"
+                  data-bs-original-title="Tramites"
                 >
-                  <i
-                    className="fa-solid fa-plus fa-lg"
-                    style={{ color: '#ffffff' }}
-                  ></i>
+                  <img className="nav-icon ticket" src="/public/img/ticket-solid.svg"></img>
                 </Link>
               </div>
-              <span style={{ color: '#eee', fontSize: '12px' }}>
-                Crear Ticket
-              </span>
-            </li>
+              <span className="span-nav">Tramites</span>
+            </li><li className="item mb-4">
+                <div className="item-nav">
+                  <Link
+                    to="/tramites/create"
+                    className={classColorBoton}
+                    aria-current="page"
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="right"
+                    data-bs-original-title="TramitesCreate"
+                  >
+                    <img className="nav-icon plus" src="/public/img/plus-solid.svg"></img>
+                  </Link>
+                </div>
+                <span className='span-nav'>
+                  Crear Tramite
+                </span>
+              </li></>
           )}
-          {/* <li className="item mb-4">
-            <div className="item-nav mb-2">
-              <a
-                href="#"
-                className="circle-item "
-                aria-current="page"
-                data-bs-toggle="tooltip"
-                data-bs-placement="right"
-                data-bs-original-title="Home"
-              >
-                <i
-                  className="fa-solid fa-desktop fa-lg"
-                  style={{ color: '#ffffff' }}
-                ></i>
-              </a>
-            </div>
-            <span style={{ color: '#eee', fontSize: '12px' }}>Terminales</span>
-          </li>
-          <li className="item mb-4">
-            <div className="item-nav mb-2">
-              <a
-                href="#"
-                className="circle-item "
-                aria-current="page"
-                data-bs-toggle="tooltip"
-                data-bs-placement="right"
-                data-bs-original-title="Home"
-              >
-                <i
-                  className="fa-solid fa-server fa-lg"
-                  style={{ color: '#ffffff' }}
-                ></i>
-              </a>
-            </div>
-            <span style={{ color: '#eee', fontSize: '12px' }}>Equipos</span>
-          </li> */}
-          {user.role.includes('admin') && (
+          {(user.rolUsuario !== LECTOR) && (
             <li className="item mb-4">
-              <div className="item-nav mb-2">
+              <div className="item-nav">
                 <Link
                   to="/usuarios"
-                  className="circle-item "
+                  className={classColorBoton}
                   aria-current="page"
                   data-bs-toggle="tooltip"
                   data-bs-placement="right"
                   data-bs-original-title="Home"
                 >
-                  <i
-                    className="fa-solid fa-network-wired fa-lg"
-                    style={{ color: '#ffffff' }}
-                  ></i>
+                  <img className="nav-icon user" id="icon-menu" src="/public/img/network-wired-solid.svg"></img>
                 </Link>
               </div>
-              <span style={{ color: '#eee', fontSize: '12px' }}>
+              <span className="span-nav">
                 Usuarios
               </span>
             </li>
           )}
-          {user.role.includes('sadmin') && (
+          {(user.perfil === SUPERADMIN || user.perfil === ADMINISTRADOR || user.perfil === ADMINISTRATIVO) && (
             <li className="item mb-4">
-              <div className="item-nav mb-2">
+              <div className="item-nav">
                 <Link
                   to="/estadisticas"
-                  className="circle-item "
+                  className={classColorBoton}
                   aria-current="page"
                   data-bs-toggle="tooltip"
                   data-bs-placement="right"
                   data-bs-original-title="Home"
                 >
-                  <i
-                    className="fa-solid fa-chart-column fa-lg"
-                    style={{ color: '#ffffff' }}
-                  ></i>
+                  <img className="nav-icon chart" id="icon-menu" src="/public/img/chart-column-solid.svg"></img>
                 </Link>
               </div>
-              <span style={{ color: '#eee', fontSize: '12px' }}>
+              <span className="span-nav">
                 Estadisticas
               </span>
             </li>
           )}
         </ul>
       </div>
+
       <main className="main">
-        <Header />
-        <section className="main-container">
-          {children}
-        </section>
+        <HeaderLogged showNav={showNav} setShowNav={setShowNav} />
+        <section className="main-container">{children}</section>
       </main>
     </div>
   )

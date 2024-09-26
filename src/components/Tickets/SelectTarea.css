@@ -1,0 +1,126 @@
+.container-tareas {
+    margin-top: .25rem;
+}
+
+.container-tareas p:first-child {
+    font-size: 18px;
+}
+
+.list-tareas {
+    border-radius: 9px;
+    padding: .6rem;
+    border: 1px solid rgb(120, 120, 120, .6) !important ;
+}
+
+.btn-tareas {
+    border-radius: 50%;
+    margin-left: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    width: 2rem;
+    height: 2rem;
+    background-color: var(--celeste);
+}
+
+.btn-tareas:hover {
+    border-radius: 50%;
+    margin-left: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    width: 2rem;
+    height: 2rem;
+    background-color: var(--celeste);
+}
+
+.btn-tarea {
+    background-color: #F8E2C2;
+    color: var(--gris-medio);
+    font-weight: 600;
+    font-size: 13px;
+    border-radius: 9px;
+    border: none;
+    padding: .25rem .75rem;
+    margin-right: .25rem;
+}
+
+.btn-tarea-focus {
+    outline: 1px solid #e0b676;
+    background-color: #e0b676;
+    color: #fff;
+    box-shadow: 0 0 6px #0000002d;
+    filter: brightness(1.05);
+}
+
+.btn-tarea-finalizada {
+    outline: 1px solid #e0b67635;
+    background-color: #e0b67635;
+    color: #7d7b7b;
+    box-shadow: 0 0 6px #0000002d;
+    filter: brightness(1.05);
+}
+
+.modal-content {
+    padding: 1rem 0;
+    margin-top: 1rem;
+    border-radius: 19px;
+}
+
+.btn-modal {
+    color: #fff;
+    border-radius: 19px;
+    border: none;
+    padding: .5rem 1.5rem;
+    font-size: 14px;
+    font-weight: 600;
+    margin: .25rem ;
+}
+
+.finish-tarea {
+    background-color: var(--color-success);
+}
+
+.delete-terea {
+    background-color: var(--color-danger);
+}
+
+.cancel-tarea {
+    background-color: var(--gris-medio);
+}
+
+.detalle-fin-tarea {
+    border: 1px solid var(--hr-color);
+    border-radius: 10px;
+    margin-top: .5rem;
+}
+
+.detalle-fin-tarea:focus-visible {
+    outline: 1px solid var(--celeste);
+}
+
+@media (max-width: 1366px) {
+
+    .btn-tareas {
+        font-size: 20px;
+    }
+    
+    .btn-tarea {
+        font-size: 11px;
+    }
+    
+    .finish-tarea {
+        font-size: 12px;
+    }
+    
+    .delete-terea {
+        font-size: 12px;
+    }
+    
+    .cancel-tarea {
+        font-size: 12px;
+    }
+    
+}

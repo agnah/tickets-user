@@ -1,3 +1,5 @@
+import "./Select.css";
+
 const Select = (props) => {
   const {
     label,
@@ -10,59 +12,93 @@ const Select = (props) => {
     classCol,
     display,
     ...attributes
-  } = props
+  } = props;
 
-  const classes = errors[name]?.message
-    ? `${classCol} has-error`
-    : `${classCol}`
+  const isError = errors[name]?.message;
 
-  const handleChange = (e) => {
-    (e.target.value !== '') ? attributes.displayFields(false) : attributes.displayFields(true)
-  }
+  const placeholderText = isError ? errors[name]?.message : placeholder;
+
+  const classes = isError ? `${classCol} has-error` : `${classCol}`;
+
+  // const handleChange = (e) => {
+  //   (e.target.value !== '') ? attributes.displayFields(false) : attributes.displayFields(true)
+  // }
 
   return (
-    <div className={classes}>
-      <div className="form-group item-form">
-        <label htmlFor={name}>{label}</label>
-        {
-          attributes?.displayFields
-            ? <select
-          name={name}
-          {...attributes}
-          {...register(name, options)}
-          className="form-control"
-          onChange={handleChange}
-        >
-          <option value="">{placeholder}</option>
-          {optionList.map((option, index) => (
-            <option key={index} value={option.toLowerCase()}>
+    <div className={`select-container d-flex flex-column ${classes}`}>
+      <div className="label-container">
+        <label className="label-form" htmlFor={name}>
+          {label}
+        </label>
+      </div>
+      <div className="w-100 form-group item-form select-box">
+        {attributes?.displayFields ? (
+          <select
+            name={name}
+            {...attributes}
+            {...register(name, options)}
+            className={`detalle-input w-100 ${
+              isError ? "help-block error error-style w-100" : ""
+            }`}
+            onChange={attributes?.onChangeInput}
+            placeholder={placeholderText}
+          >
+            <option value="">{placeholderText}</option>
+            {optionList.map((option, index) => (
+              <option key={index} value={option.toLowerCase()}>
+                {option}
+              </option>
+            ))}
+          </select>
+        ) : (
+          <select
+            name={name}
+            {...attributes}
+            {...register(name, options)}
+            className={`${
+              props?.classInput
+                ? `${props.classInput} detalle-input w-100`
+                : "detalle-input w-100"
+            } ${isError ? "help-block error error-style w-100" : ""}`}
+            onChange={attributes?.onChangeInput}
+            placeholder={placeholderText}
+          >
+            <option value="">{placeholderText}</option>
+            {optionList.map((option, index) => (
+              <>
+                {attributes?.selectedOption !== null &&
+                attributes?.selectedOption === option ? (
+                  <option key={index} value={index + 1} selected="selected">
+                    {option}
+                  </option>
+                ) : (
+                  <option key={index} value={index + 1}>
+                    {option}
+                  </option>
+                )}
+              </>
+            ))}
+            {/* {optionList.map((option, index) => (
+            <option key={index} value={index+1}>
               {option}
             </option>
-          ))}
-        </select>
-            : <select
-          name={name}
-          {...attributes}
-          {...register(name, options)}
-          className="form-control"
-          disabled={display}
-        >
-          <option value="">{placeholder}</option>
-          {optionList.map((option, index) => (
-            <option key={index} value={option}>
-              {option}
-            </option>
-          ))}
-        </select>
-        }
-        {errors[name] && (
-          <p className="help-block error" role="alert">
+          ))} */}
+          </select>
+        )}
+        <div className="select-icon">
+          <img
+            src="../public/img/caret-down-solid.svg"
+            className="fa-solid fa-caret-down"
+          ></img>
+        </div>
+      </div>
+      {/* {errors[name] && (
+          <p className="help-block error text-error" role="alert">
             {errors[name]?.message}
           </p>
-        )}
-      </div>
+      )} */}
     </div>
-  )
-}
+  );
+};
 
-export default Select
+export default Select;

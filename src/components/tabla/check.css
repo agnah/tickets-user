@@ -1,0 +1,59 @@
+.container-checks {
+    display: block;
+    justify-content: center;
+    font-weight: 600;
+}
+
+.container-checks label {
+    padding: 0 .5rem;
+    display: flex;
+    align-items: center;
+}
+
+.container-checks input {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: .5rem;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 18px;
+    height: 18px;
+    background-color: #fff;
+    border: 1px solid var(--gris-medio);
+    border-radius: 50%;
+    outline: none;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+/* Cambiar el estilo cuando el checkbox está marcado */
+.container-checks input:checked {
+    background-color: var(--color-tickets);
+    border-color: var(--color-tickets);
+  }
+  
+/* Estilo del indicador del checkbox */
+.container-checks input:checked::before {
+    content: url('/public/img/check-solid.svg');
+    font-family: "Font Awesome 5 Free"; 
+    font-size: 8px;
+    position: absolute;
+    top: auto;
+    left: auto;
+    width: 10px;
+    height: 10px;
+}
+
+.container-checks label:first-child {
+    padding-left: 0;
+}
+
+#right-checks {
+    justify-content: flex-start;
+}
+
+/* #left-checks {
+    justify-content: flex-start;
+} */

@@ -1,5 +1,6 @@
 #file-upload {
     text-align: center;
+    margin-top: .25rem;
 }
 
 #input-file-upload {
@@ -10,11 +11,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border-width: 2px;
-    border-radius: 1rem;
-    border-style: dashed;
-    border-color: #cbd5e1;
-    background-color: #f8fafc;
+    border-radius: 9px;
+    border: 1px solid var(--gris-claro);
+    background-color: #fff;
+    padding: .6em;
+    color: var(--hr-color);
 }
 
 .upload-button {
@@ -45,7 +46,7 @@
     left: 0px;
 }
 
-img{
+.imagenes img{
     height: 50px;
     width: auto;
 }

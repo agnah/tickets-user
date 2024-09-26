@@ -1,0 +1,27 @@
+.select-box {
+    display: flex;
+    align-items: center;
+}
+
+.select-box select:focus {
+    border-color: var(--celeste);
+    box-shadow: 0 0 0 0.1rem rgba(94, 178, 203, 0.25);
+}
+
+.fa-caret-down {
+    width: .7em;
+    height: .7rem;
+    color: var(--gris-medio);
+    position: relative;
+    right: 2vw;
+    bottom: .1rem;
+}
+
+@media (max-width: 1366px) {
+    .fa-caret-down {
+        width: .7em;
+        height: .7rem;
+        right: 1.5vw;
+        bottom: .1rem;
+    }
+}

@@ -1,15 +1,84 @@
 .tablero {
     border-radius: 10px;
     background: #fff;
-    padding: 20px 30px;
+    padding: 40px;
     margin: 0 1rem 1rem;
-    box-shadow: 1px 1px 3px #999;
+    box-shadow: 3px 3px 6px #0000001a;
 }
 
-.tablero h3 {
+.tablero h5 {
     margin: 0;
+    color: var(--gris-oscuro);
+    font-weight: 800;
+    font-size: 1.6rem;
+}
+
+.tablero .state-button {
+    margin-left: .8rem;
+}
+
+.titulo-coloreado {
+    color: var(--color-ticket-nuevo);
 }
 
 .tablero hr {
-    margin: 1rem 0;
+    margin: 1rem 0 1rem;
+    height: 2px;
+    border: none;
+    background: var(--hr-color);
+}
+
+.span-path {
+    color: var(--gris-medio);
+    font-weight: 500;
+}
+
+.check-prioridad {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: .5rem;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 15px;
+    height: 15px;
+    background-color: #fff;
+    border: 1px solid var(--gris-medio);
+    border-radius: 50%;
+    outline: none;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.check-prioridad:checked {
+    background-color: var(--celeste);
+    border-color: var(--celeste);
+}
+
+.check-prioridad:checked::before {
+    content: url('/public/img/check-solid.svg');
+    font-family: "Font Awesome 5 Free";
+    font-size: 7px;
+    position: absolute;
+    top: auto;
+    left: auto;
+    width: 8px;
+    height: 8px;
+}
+
+.form-prioridad {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--gris-medio);
+    margin-left: 1rem;
+}
+
+.span-cant-tickets {
+    color: var(--hr-color);
+    font-weight: 400;
+    font-size: 14;
 }
